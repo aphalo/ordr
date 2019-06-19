@@ -38,13 +38,12 @@ Suggests:
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
-    'biplot-gg.r'
-    'biplot-legend.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'
     'fortify.r'
     'geom-axis.r'
+    'gg-legend.r'
     'geom-intervals.r'
     'geom-isolines.r'
     'geom-path.r'
@@ -54,6 +53,8 @@ Collate:
     'geom-text.r'
     'geom-unit-circle.r'
     'geom-vector.r'
+    'gg-biplot.r'
+    'gg-triplot.r'
     'lra.r'
     'masks.r'
     'utils.r'
