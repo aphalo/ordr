@@ -21,10 +21,11 @@ Other assignments must be supplied in each layer added to the plot.}
 \item{axis.percents}{Whether to concatenate default axis labels with inertia
 percentages.}
 
-\item{sec.axes}{Matrix factor character to specify a secondary set of axes.}
+\item{sec.axes}{Matrix factor character (\code{"u"} or \code{"v"}) to specify a
+secondary set of axes.}
 
 \item{scale.factor}{Numeric value used to scale the secondary axes against
-the primary axes; ignored if \code{sec.axes} is not specified.}
+the primary axes if \code{sec.axes} is specified.}
 
 \item{scale_u, scale_v}{Either the character name of a numeric variable in
 \code{get_*(ordination)} or a numeric vector of length
@@ -48,10 +49,10 @@ object \code{ordination}. The baseline object is the default unadorned
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
 \item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_equal]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination.
-\item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, and if
-\code{axis.percents} is \code{TRUE}, \code{p$labels$x} or \code{p$labels$y} are defaulted to the
-coordinate names concatenated with the percentages of \link[=conference]{inertia}
-captured by the coordinates.
+\item When \code{x} (\code{y}) is mapped to a coordinate of \code{ordination}, and if
+\code{axis.percents} is \code{TRUE}, then \code{p$labels$x} (\code{p$labels$y}) defaults to the
+coordinate name concatenated with the percentage of \link[=conference]{inertia}
+captured by this coordinate.
 \item \code{p} is assigned the class \code{"ggbiplot"} in addition to \code{"ggplot"}. This
 serves no functional purpose currently.
 }
@@ -60,10 +61,17 @@ Furthermore, the user may feed single integer values to the \code{x} and \code{y
 aesthetics, which will be interpreted as the corresponding coordinates in the
 ordination.
 
+If \code{sec.axes} is \code{TRUE}, then secondary \code{x} and \code{y} axes are added internally
+using \code{scale_*_continuous()}. (\strong{NB:} These will be overwritten by
+additional position scales; a more stable implementation is needed.) When
+including gridlines, set \code{scale.factor} to a ratio of small integers, up to
+powers of 10 (e.g. \eqn{5} or \eqn{\frac{2}{3}\times 10^3}{2/3 * 1e3}), to
+make secondary axis coordinates easier to read.
+
 \code{ord_aes()} is a convenience function that generates a full-rank set of
-coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
-shared coordinates of the ordination object, along with any additional
-aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
+coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the shared
+coordinates of the ordination object, along with any additional aesthetics
+that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 }
 \section{Biplot layers}{
 

@@ -17,10 +17,10 @@
 #' - `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
 #' faithfully render the geometry of an ordination.
 
-#' - When `x` or `y` are mapped to coordinates of `ordination`, and if
-#' `axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
-#' coordinate names concatenated with the percentages of [inertia][conference]
-#' captured by the coordinates.
+#' - When `x` (`y`) is mapped to a coordinate of `ordination`, and if
+#' `axis.percents` is `TRUE`, then `p$labels$x` (`p$labels$y`) defaults to the
+#' coordinate name concatenated with the percentage of [inertia][conference]
+#' captured by this coordinate.
 
 #' - `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
 #' serves no functional purpose currently.
@@ -30,10 +30,17 @@
 #' aesthetics, which will be interpreted as the corresponding coordinates in the
 #' ordination.
 #'
+#' If `sec.axes` is `TRUE`, then secondary `x` and `y` axes are added internally
+#' using `scale_*_continuous()`. (**NB:** These will be overwritten by
+#' additional position scales; a more stable implementation is needed.) When
+#' including gridlines, set `scale.factor` to a ratio of small integers, up to
+#' powers of 10 (e.g. \eqn{5} or \eqn{\frac{2}{3}\times 10^3}{2/3 * 1e3}), to
+#' make secondary axis coordinates easier to read.
+#'
 #' `ord_aes()` is a convenience function that generates a full-rank set of
-#' coordinate aesthetics `.coord1`, `.coord2`, etc. mapped to the
-#' shared coordinates of the ordination object, along with any additional
-#' aesthetics that are processed internally by [ggplot2::aes()].
+#' coordinate aesthetics `.coord1`, `.coord2`, etc. mapped to the shared
+#' coordinates of the ordination object, along with any additional aesthetics
+#' that are processed internally by [ggplot2::aes()].
 #' 
 
 #' @template ggbiplot-layers
@@ -46,9 +53,10 @@
 #'   Other assignments must be supplied in each layer added to the plot.
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
-#' @param sec.axes Matrix factor character to specify a secondary set of axes.
+#' @param sec.axes Matrix factor character (`"u"` or `"v"`) to specify a
+#'   secondary set of axes.
 #' @param scale.factor Numeric value used to scale the secondary axes against
-#'   the primary axes; ignored if `sec.axes` is not specified.
+#'   the primary axes if `sec.axes` is specified.
 #' @param scale_u,scale_v Either the character name of a numeric variable in
 #'   `get_*(ordination)` or a numeric vector of length
 #'   `nrow(get_*(ordination))`, used to scale the coordinates of \eqn{U} or
