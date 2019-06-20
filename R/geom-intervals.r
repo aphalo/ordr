@@ -4,7 +4,7 @@
 #' @description `geom_*_lineranges()` renders horizontal and vertical intervals
 #'   for a specified subject or variable; `geom_*_pointranges()` additionally
 #'   renders a point at their crosshairs.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -24,7 +24,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-intervals
+#' @name geom-biplot-intervals
 #' @include gg-legend.r
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
