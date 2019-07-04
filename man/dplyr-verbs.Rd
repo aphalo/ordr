@@ -15,6 +15,8 @@
 \alias{transmute_v}
 \alias{bind_cols_u}
 \alias{bind_cols_v}
+\alias{left_join_u}
+\alias{left_join_v}
 \title{\strong{dplyr} verbs for \code{tbl_ord} factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
@@ -42,6 +44,10 @@ transmute_v(.data, ...)
 bind_cols_u(.data, ...)
 
 bind_cols_v(.data, ...)
+
+left_join_u(.data, ...)
+
+left_join_v(.data, ...)
 }
 \arguments{
 \item{.data}{A \code{[tbl_ord]} object.}
@@ -107,7 +113,10 @@ benthos_ca \%>\%
   geom_u_vector(color = "brown", arrow = NULL) +
   geom_u_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_u_text(
+    stat = "chull",
+    color = "brown", hjust = "outward", vjust = "outward"
+  ) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
 }
