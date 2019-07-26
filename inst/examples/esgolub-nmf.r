@@ -1,0 +1,7 @@
+data(esGolub, package = "NMF")
+head(esGolub)
+dim(esGolub)
+x <- NMF::nmf(esGolub, 3)
+head(x@fit@W)
+y <- as_tbl_ord(x)
+recover_u(y)
