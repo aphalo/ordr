@@ -16,3 +16,13 @@ mtcars_lm %>%
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
   )
+# TESTING
+mtcars_lm %>%
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
+  geom_u_point(aes(color = influence)) +
+  geom_v_vector() +
+  geom_v_isoline(axes = 1, by = 5) +
+  ggtitle(
+    "Weight isolines with data colored by importance",
+    "Regressing mpg onto weight and number of cylinders"
+  )

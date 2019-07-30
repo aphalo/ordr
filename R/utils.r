@@ -57,22 +57,16 @@ matrix_stat <- function(.matrix, stat) {
 u_stat <- function(stat) matrix_stat("u", stat)
 v_stat <- function(stat) matrix_stat("v", stat)
 
-setup_u_data <- function(data, params) {
-  data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
+setup_biplot_data <- function(data, params, .matrix) {
+  .matrix <- match_factor(.matrix)
+  data[data$.matrix == .matrix, -match(".matrix", names(data)), drop = FALSE]
 }
+setup_u_data <- function(data, params) setup_biplot_data(data, params, "u")
+setup_v_data <- function(data, params) setup_biplot_data(data, params, "v")
 
-setup_v_data <- function(data, params) {
-  data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
-}
-
-family_arg <- function(family_fun) {
-  if (! is.null(family_fun)) {
-    if (is.character(family_fun)) {
-      family_fun <- get(family_fun, mode = "function", envir = parent.frame())
-    }
-    if (is.function(family_fun)) {
-      family_fun <- family_fun()
-    }
-  }
-  family_fun
-}
+#setup_u_data <- function(data, params) {
+#  data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
+#}
+#setup_v_data <- function(data, params) {
+#  data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
+#}
